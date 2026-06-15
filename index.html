@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sareenah Laing — Narrative Researcher & Data Storyteller</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0a0d1a;
+      --card:    #111526;
+      --border:  #1e2540;
+      --gold:    #c8a96e;
+      --gold-dim:#8a6f40;
+      --teal:    #4ecdc4;
+      --body:    #e8e0d0;
+      --muted:   #8a8fa8;
+      --white:   #f5f0e8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--body);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      overflow: hidden;
+    }
+
+    /* Pearl glow — the signature element */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -56%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse at center,
+        rgba(200, 169, 110, 0.12) 0%,
+        rgba(78, 205, 196, 0.06) 40%,
+        transparent 70%);
+      pointer-events: none;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.7; transform: translate(-50%, -56%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%, -56%) scale(1.08); }
+    }
+
+    .hero-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      position: relative;
+    }
+
+    .hero-title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .hero-links a {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid rgba(78,205,196,0.3);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-links a:hover { color: var(--gold); border-color: var(--gold); }
+
+    .hero-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 2.5rem auto 0;
+    }
+
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section { padding: 5rem 0; }
+    section:first-of-type + section { padding-top: 2rem; }
+
+    /* ── ABOUT ── */
+    .about-text {
+      font-size: 1.15rem;
+      line-height: 1.85;
+      color: var(--body);
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* ── SECTION HEADING ── */
+    .section-label {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim));
+    }
+
+    .section-label::after {
+      background: linear-gradient(90deg, var(--gold-dim), transparent);
+    }
+
+    /* ── PROJECT CARDS ── */
+    .projects { display: flex; flex-direction: column; gap: 2.5rem; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 2rem 2.2rem;
+      transition: border-left-color 0.25s, background 0.25s;
+    }
+
+    .card:hover {
+      border-left-color: var(--teal);
+      background: #141829;
+    }
+
+    .card-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .card-body {
+      font-size: 1rem;
+      color: var(--body);
+      margin-bottom: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .card-body em {
+      color: var(--muted);
+      font-style: italic;
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
+    }
+
+    /* ── EXHIBIT CARDS ───────────────────────── */
+
+.project-trigger{
+  display:block;
+  width:100%;
+  border:none;
+  background:none;
+  padding:0;
+  cursor:pointer;
+  text-align:left;
+}
+
+.project-image{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#0b1020;
+}
+
+.project-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  transition:transform .5s ease;
+}
+
+.project-trigger:hover .project-image img{
+  transform:scale(1.03);
+}
+
+.project-caption{
+  padding:1rem 0 .25rem;
+}
+
+.project-caption small{
+  display:block;
+  color:var(--muted);
+  letter-spacing:.15em;
+  margin-bottom:.5rem;
+  font-size:.75rem;
+}
+
+.project-caption h3{
+  color:var(--gold);
+  font-family:'Cinzel Decorative', serif;
+  font-size:1rem;
+  font-weight:400;
+}
+
+.project-details{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:
+    max-height .5s ease,
+    opacity .35s ease,
+    padding .35s ease;
+}
+
+.card.active .project-details{
+  max-height:800px;
+  opacity:1;
+  padding-top:1.5rem;
+}
+
+.expand-indicator{
+  margin-top:.5rem;
+  color:var(--teal);
+  font-size:.85rem;
+  letter-spacing:.08em;
+}
+
+.card.active .expand-indicator{
+  color:var(--gold);
+}
+
+    .tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.2em 0.7em;
+      letter-spacing: 0.06em;
+    }
+
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .card-links a {
+      font-size: 0.88rem;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(78,205,196,0.25);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .card-links a:hover { color: var(--gold); border-color: var(--gold-dim); }
+
+    /* ── PIPELINE ── */
+    .pipeline-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .pipeline-step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .step-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      color: var(--body);
+      letter-spacing: 0.1em;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 0.5em 1.4em;
+      min-width: 220px;
+      text-align: center;
+    }
+
+    .pipeline-connector {
+      width: 1px;
+      height: 28px;
+      background: linear-gradient(180deg, var(--gold-dim), transparent);
+      margin: 0 auto;
+    }
+
+    /* ── TOOLS ── */
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+
+    .tool-chip {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8rem;
+      color: var(--teal);
+      border: 1px solid rgba(78,205,196,0.25);
+      padding: 0.35em 1em;
+      letter-spacing: 0.07em;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .tool-chip:hover {
+      background: rgba(78,205,196,0.08);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--teal);
+      font-size: 0.9rem;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .card { padding: 1.4rem 1.2rem; }
+      .step-label { min-width: 180px; font-size: 0.78rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero::before, .scroll-hint { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero">
+  <h1 class="hero-name">Sareenah Laing</h1>
+  <p class="hero-title">Narrative Researcher &nbsp;·&nbsp; Data Storyteller &nbsp;·&nbsp; Creative Writer</p>
+
+  <nav class="hero-links" aria-label="External profiles">
+    <a href="https://www.darkfoliopress.com/" target="_blank" rel="noopener">Dark Folio Press</a>
+    <a href="https://github.com/Dark-Folio-Press/READme/blob/main/README.md" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+
+
+</section>
+
+<!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+<section aria-labelledby="about-label">
+  <div class="container">
+    <h2 class="section-label" id="about-label">About</h2>
+    <p class="about-text">
+      I research unusual stories, folklore, historical mysteries, and human behaviour. My work combines narrative development, data analysis, creative writing, and digital storytelling to transform complex source material into compelling experiences. Research methods include Python, SQL, data visualization, and long-form source analysis — applied to true stories, unexplained events, urban legends, mythological traditions, and the intersection of history, culture, and human behaviour.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ WORK ═══════════════════════════ -->
+<section aria-labelledby="work-label">
+  <div class="container">
+    <h2 class="section-label" id="work-label">Selected Work</h2>
+
+    <div class="projects">
+
+      <!-- Pope Joan -->
+      <article class="card">
+
+  <button class="project-trigger">
+
+    <div class="project-image">
+      <img src="images/popejoan.png">
+    </div>
+
+    <div class="project-caption">
+      <small>EXHIBITION I</small>
+      <h3>Pope Joan</h3>
+      <div class="expand-indicator">
+        Click image to reveal details
+      </div>
+    </div>
+
+  </button>
+
+  <div class="project-details">
+
+    <div class="card-body">
+      <em>Historical research · Source comparison · Narrative synthesis</em>
+
+      The story of a woman who rose through the Church
+      to become a pregnant Pope while disguised as a man.
+    </div>
+
+    <div class="card-tags">
+      <span class="tag">historical research</span>
+      <span class="tag">source comparison</span>
+      <span class="tag">narrative synthesis</span>
+      <span class="tag">story development</span>
+    </div>
+
+    <div class="card-links">
+      <a href="https://www.darkfoliopress.com/post/pope-joan-the-veiled-truth" target="_blank">
+        Blog Post ↗
+      </a>
+
+      <a href="https://www.tiktok.com/@reenahlaing/photo/7650108713394736404?lang=en-GB" target="_blank">
+        TikTok ↗
+      </a>
+    </div>
+
+  </div>
+
+</article>
+
+  <article class="card">
+
+  <button class="project-trigger">
+
+    <div class="project-image">
+      <img src="images/oracle-of-the-harpies-landing.png" alt="The Oracle of the Harpies">
+    </div>
+
+    <div class="project-caption">
+      <small>EXHIBITION II</small>
+      <h3>The Oracle of the Harpies</h3>
+      <div class="expand-indicator">
+        Click image to reveal details
+      </div>
+    </div>
+
+  </button>
+
+  <div class="project-details">
+
+    <div class="card-body">
+      <em>Worldbuilding · Mythological research · Interactive storytelling</em>
+          A symbolic system of guided self-reflection built around the image of the pearl — the wisdom, strength, and identity that forms around an original wound, layer by layer, until the injury becomes something precious.
+        
+    </div>
+        <div class="card-tags">
+          <span class="tag">worldbuilding</span>
+          <span class="tag">mythological research</span>
+          <span class="tag">interactive storytelling</span>
+        </div>
+        <div class="card-links">
+          <a href="https://dark-folio-press.github.io/The-Oracle-Of-Harpies/" target="_blank" rel="noopener">Oracle Demo ↗</a>
+          <a href="https://dark-folio-press.github.io/The-Oracle-Of-Harpies/portfolio/" target="_blank" rel="noopener">Portfolio Slideshow ↗</a>
+        </div>
+      </article>
+
+      
+      <!-- Bigfoot -->
+      <article class="card">
+
+  <button class="project-trigger">
+
+    <div class="project-image">
+      <img src="images/bigfoot.png" alt="Bigfoot">
+    </div>
+
+    <div class="project-caption">
+      <small>EXHIBITION IV</small>
+      <h3>Bigfoot by Moonlight</h3>
+      <div class="expand-indicator">
+        Click image to reveal details
+      </div>
+    </div>
+
+  </button>
+
+  <div class="project-details">
+        <div class="card-body">
+          <em>Exploratory analysis · Statistical reasoning · Storytelling through data</em>
+          Tracking the elusive Sasquatch across the Pacific Northwest by analyzing fractional moonlight levels across a century of sightings. Nearly 5,000 reports spanning 100 years — and a startling correlation revealed.
+        </div>
+        <div class="card-tags">
+          <span class="tag">exploratory analysis</span>
+          <span class="tag">statistical reasoning</span>
+          <span class="tag">storytelling through data</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/slaing77/Finding-Bigfoot_by_moonlight/blob/main/README.md" target="_blank" rel="noopener">Data Story ↗</a>
+        </div>
+      </article>
+
+      <!-- Vasilisa -->
+      <article class="card">
+
+  <button class="project-trigger">
+
+    <div class="project-image">
+      <img src="images/cover.png" alt="Vasilisa">
+    </div>
+
+    <div class="project-caption">
+      <small>EXHIBITION IV</small>
+      <h3>Vasilisa</h3>
+      <div class="expand-indicator">
+        Click image to reveal details
+      </div>
+    </div>
+  </button>
+
+  <div class="project-details">
+        <div class="card-body">
+          <em>A mythic retelling of Vasilisa the Beautiful
+through folklore, psychology,
+trauma research, and ancestral wisdom.
+        </div>
+        <div class="card-tags">
+            
+
+          <span class="tag">Forensic Folklore</span>
+          <span class="tag">Story Development</span>
+          <span class="tag">Character Design</span>
+          <span class="tag">Mythic Narrative</span>
+        </div>
+        <div class="card-links">
+          <a href="https://www.darkfoliopress.com/vasilisa-s-story-board/story-board" target="_blank" rel="noopener">Story Board↗</a>
+          <a href="https://www.tiktok.com/@reenahlaing/video/7609097951536762133?is_from_webapp=1&sender_device=pc&web_id=7632046956680103444" target="_blank" rel="noopener">TikTok ↗</a>
+        </div>
+      </article>
+
+      <!-- MMIW -->
+      <article class="card">
+
+  <button class="project-trigger">
+
+    <div class="project-image">
+      <img src="images/mmiw.png" alt="Missing and Murdered Indigenous Women">
+    </div>
+
+    <div class="project-caption">
+      <small>EXHIBITION III</small>
+      <h3>Missing and Murdered Indigenous Women in Canada</h3>
+      <div class="expand-indicator">
+        Click image to reveal details
+      </div>
+    </div>
+
+  </button>
+
+  <div class="project-details">
+        <div class="card-body">
+          <em>Data collection · Pattern analysis · Narrative visualization</em>
+          3,039 missing and murdered women in Canada. These are their names. These are their cases.
+        </div>
+        <div class="card-tags">
+          <span class="tag">data collection</span>
+          <span class="tag">pattern analysis</span>
+          <span class="tag">narrative visualization</span>
+        </div>
+        <div class="card-links">
+          <a href="https://public.tableau.com/app/profile/sarifeenah/viz/MissingAndMurderedinCanada/MMVWDASHBOARD" target="_blank" rel="noopener">Interactive Dashboard ↗</a>
+        </div>
+      </article>
+
+      <!-- Jackie -->
+      <article class="card">
+        <h3 class="card-title">Jackie</h3>
+        <div class="project-image">
+
+       <img src="images/Jackie (1).jpeg" alt="Jackie">
+       </div>        
+       
+       <div class="card-body">
+          <em>An exploration of the collision between occult imagination, scientific ambition,and the mythology of the American Space Age.
+        </div>
+        <div class="card-tags">
+          <span class="tag">Magic</span>
+          <span class="tag">Science</span>
+          <span class="tag">American Myth</span>
+          <span class="tag">embedded audio</span>
+        </div>
+        <div class="card-links">
+          <a href="https://dark-folio-press.github.io/katabasis/songs/jackie" target="_blank" rel="noopener">Annotated Lyrics and MP3↗</a>
+        </div>
+      </article>
+      <!-- The Torch Song -->
+      <article class="card">
+        <h3 class="card-title">The Torch Song</h3>
+        <div class="project-image">
+        <img src="images/Liberty.png" alt="The Torch Song">
+
+       </div>
+      
+        <div class="card-body">
+          <em>Narrative songwriting · American mythic symbolism</em>
+          A reflection on America's enduring dream — freedom, opportunity, human dignity — and what it means to keep the torch burning. Liberty as a living flame requiring care, courage, and stewardship.
+        </div>
+        <div class="card-tags">
+          <span class="tag">narrative songwriting</span>
+          <span class="tag">american mythic symbolism</span>
+          <span class="tag">embedded audio</span>
+        </div>
+        <div class="card-links">
+          <a href="https://dark-folio-press.github.io/katabasis/songs/the-torch-song" target="_blank" rel="noopener">Annotated Lyrics and MP3 ↗</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ METHODS ═══════════════════════════ -->
+<section aria-labelledby="methods-label">
+  <div class="container">
+    <h2 class="section-label" id="methods-label">Research Pipeline</h2>
+
+    <div class="pipeline-wrap" role="list">
+      <div class="pipeline-step" role="listitem"><span class="step-label">Source Collection</span></div>
+      <div class="pipeline-connector" aria-hidden="true"></div>
+      <div class="pipeline-step" role="listitem"><span class="step-label">Analysis</span></div>
+      <div class="pipeline-connector" aria-hidden="true"></div>
+      <div class="pipeline-step" role="listitem"><span class="step-label">Pattern Recognition</span></div>
+      <div class="pipeline-connector" aria-hidden="true"></div>
+      <div class="pipeline-step" role="listitem"><span class="step-label">Story Development</span></div>
+      <div class="pipeline-connector" aria-hidden="true"></div>
+      <div class="pipeline-step" role="listitem"><span class="step-label">Audience Experience</span></div>
+    </div>
+
+    <div class="tools-grid" role="list" aria-label="Tools and technologies">
+      <span class="tool-chip" role="listitem">Python</span>
+      <span class="tool-chip" role="listitem">SQL</span>
+      <span class="tool-chip" role="listitem">Jupyter Notebooks</span>
+      <span class="tool-chip" role="listitem">Data Visualization</span>
+      <span class="tool-chip" role="listitem">Dashboard Design</span>
+      <span class="tool-chip" role="listitem">LLM Evaluation</span>
+      <span class="tool-chip" role="listitem">Prompt Engineering</span>
+      <span class="tool-chip" role="listitem">Web Development</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  <p class="footer-name">Sareenah Laing</p>
+  <nav class="footer-links" aria-label="Footer links">
+    <a href="https://www.darkfoliopress.com/" target="_blank" rel="noopener">Dark Folio Press</a>
+    <a href="https://github.com/Dark-Folio-Press/READme/blob/main/README.md" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+  <p class="footer-copy">Dark Folio Press &nbsp;·&nbsp; Narrative Research &amp; Digital Storytelling</p>
+</footer>
+<script>
+
+document.querySelectorAll('.project-trigger')
+.forEach(trigger => {
+
+  trigger.addEventListener('click', () => {
+
+    const card = trigger.closest('.card');
+
+    card.classList.toggle('active');
+
+  });
+
+});
+
+</script>
+</body>
+</html>
